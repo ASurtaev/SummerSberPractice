@@ -1,0 +1,364 @@
+openapi: 3.0.2
+info:
+  title: CONTENT MANAGEMENT API
+  description: CONTENT MANAGEMENT
+  contact:
+    name: CONTENT MANAGEMENT API
+    email: some_email@gmail.com
+  version: 0.1 beta
+servers:
+- url: https://contentmnagement.org/data/2.5/
+paths:
+  /Load_new_post:
+    post:
+      tags:
+      - Load new post
+      summary: Loads a new post
+      description: There is description
+      operationId: load_new_post
+      parameters:
+      - name: photo
+        in: query
+        description: Photo file in base64(?) format
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: description_post
+        in: query
+        description: Atributes of post. Post name is always atribute with index 0.
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: tag_post
+        in: query
+        description: Atributes of post
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: load_data_time
+        in: query
+        description: Time of loading post
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: file_size
+        in: query
+        description: Size of the photo file in bytes
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: file_size_pixels
+        in: query
+        description: Size of the photo file in pixels
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+      - name: geolocation
+        in: query
+        description: Geolocation of the user
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: user_id
+        in: query
+        description: Id of the user
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: MAC_adress
+        in: query
+        description: MAC-adress of the user device, from which was loaded the post
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: IP_adress
+        in: query
+        description: IP-adress of the user device, from which was loaded the post
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: File_format
+        in: query
+        description: Format of file like JPEG,PNG,BMP or others
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successful loading response, photo added to database
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Successfull'
+        "404":
+          description: Post wasn't loaded response
+          content:
+            text/plain:
+              schema:
+                title: Error, post wasn't loaded
+                type: string
+                example: Post wasn't loaded
+                x-content-type: text/plain
+      x-openapi-router-controller: swagger_server.controllers.load_new_post_controller
+  /Delete_post:
+    delete:
+      tags:
+      - Delete post
+      summary: Delete post
+      description: There is description
+      operationId: delete_post
+      parameters:
+      - name: post_id
+        in: query
+        description: Post id
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Successful deletion response, post deleted from the database
+          content:
+            text/plain:
+              schema:
+                title: Error, post wasn't loaded
+                type: string
+                example: Successful deletion response, post deleted from the database
+                x-content-type: text/plain
+        "400":
+          description: Non-existing post_id
+          content:
+            text/plain:
+              schema:
+                title: Ok
+                type: string
+                example: Non-existing post_id
+                x-content-type: text/plain
+      x-openapi-router-controller: swagger_server.controllers.delete_post_controller
+  /Edit_post_field:
+    post:
+      tags:
+      - Edit post
+      summary: Edit post
+      description: You can change the post's atribute using it's index from GetPostAtributes
+      operationId: edit_post
+      parameters:
+      - name: Post_ID
+        in: query
+        description: Post id
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: Index_field
+        in: query
+        description: Index of the required field
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Corrected sucesfully
+        "300":
+          description: Post with this id doesn't exist
+        "500":
+          description: Atribute with this index doesn't exist
+      x-openapi-router-controller: swagger_server.controllers.edit_post_controller
+  /Get_post_atributes:
+    get:
+      tags:
+      - Get post atributes
+      summary: Get post atributes
+      description: You can get the list of the post's indexes, name of the post always
+        has index 0
+      operationId: get_post_atributes
+      parameters:
+      - name: Post_ID
+        in: query
+        description: Post id
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Indexes returned sucesfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Successfull_1'
+        "300":
+          description: Post with this id doesn't exist
+      x-openapi-router-controller: swagger_server.controllers.get_post_atributes_controller
+  /Get_post:
+    get:
+      tags:
+      - Get post
+      summary: Get post
+      description: Get post by it's atributes
+      operationId: get_post
+      parameters:
+      - name: post_id
+        in: query
+        description: Post id
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Post got succesfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Successfull_2'
+        "400":
+          description: Post id doesn't exist
+          content:
+            text/plain:
+              schema:
+                title: Post id doesn't exist
+                type: string
+                example: Post id doesn't exist
+                x-content-type: text/plain
+      x-openapi-router-controller: swagger_server.controllers.get_post_controller
+  /Get_metadata_post:
+    get:
+      tags:
+      - Get metadata post
+      summary: Get metadata post
+      description: There is description
+      operationId: get_metadata_post
+      parameters:
+      - name: Post_ID
+        in: query
+        description: Post id
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Metadata received
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Successfull_3'
+        "400":
+          description: Post id doesn't exist
+          content:
+            text/plain:
+              schema:
+                title: Post id doesn't exist
+                type: string
+                example: Post id doesn't exist
+                x-content-type: text/plain
+      x-openapi-router-controller: swagger_server.controllers.get_metadata_post_controller
+components:
+  schemas:
+    Successfull:
+      title: Successfull
+      type: object
+      properties:
+        PostID:
+          type: integer
+        Result:
+          type: boolean
+      example:
+        PostID: 0
+        Result: true
+    Successfull_1:
+      title: Successfull
+      type: object
+      properties:
+        Atributes:
+          type: array
+          items:
+            type: string
+        Result:
+          type: boolean
+      example:
+        Atributes:
+        - Atributes
+        - Atributes
+        Result: true
+    Successfull_2:
+      title: Successfull
+      type: object
+      properties:
+        Name:
+          type: string
+      example:
+        Name: Name
+    Successfull_3:
+      title: Successfull
+      type: object
+      properties:
+        load_data_time:
+          type: string
+        file_size:
+          type: string
+        file_size_pixels:
+          type: array
+          items:
+            type: integer
+        geolocation:
+          type: string
+        user_id:
+          type: string
+        MAC-adress:
+          type: string
+        IP-adress:
+          type: string
+        File_format:
+          type: string
+        Result:
+          type: boolean
+      example:
+        file_size_pixels:
+        - 0
+        - 0
+        user_id: user_id
+        load_data_time: load_data_time
+        File_format: File_format
+        IP-adress: IP-adress
+        file_size: file_size
+        MAC-adress: MAC-adress
+        geolocation: geolocation
+        Result: true
+
