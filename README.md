@@ -1,4 +1,4 @@
-http://localhost:8080/github/repo-size/ASurtaev/SummerSberPractice?style=plastic
+![GitHub watchers](https://img.shields.io/github/watchers/ASurtaev/SummerSberPractice?label=Watch&style=social)
 # Swagger generated server
 
 ## Overview
