@@ -1,3 +1,4 @@
+http://localhost:8080/github/repo-size/ASurtaev/SummerSberPractice?style=plastic
 # Swagger generated server
 
 ## Overview
