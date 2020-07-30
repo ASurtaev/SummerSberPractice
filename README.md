@@ -1,7 +1,7 @@
 ![GitHub watchers](https://img.shields.io/github/watchers/ASurtaev/SummerSberPractice?label=Watch&style=social)
 ![GitHub top language](https://img.shields.io/github/languages/top/ASurtaev/SummerSberPractice)
 ![GitHub_last_commit](https://img.shields.io/github/last-commit/ASurtaev/SummerSberPractice)
-![GitHub contributors](https://img.shields.io/github/contributors/ASurtaev/SummerSberPractice)<space><space><space>
+![GitHub contributors](https://img.shields.io/github/contributors/ASurtaev/SummerSberPractice)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/ASurtaev/SummerSberPractice)
 [![codecov](https://codecov.io/gh/ASurtaev/SummerSberPractice/branch/master/graph/badge.svg)](https://codecov.io/gh/ASurtaev/SummerSberPractice)
 [![chat](https://img.shields.io/discord/732082351357821018?label=Discord&style=flat-square)](https://discord.gg/nECsHwV)
