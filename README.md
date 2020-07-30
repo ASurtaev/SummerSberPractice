@@ -8,4 +8,4 @@
   
 Service for content and metadata management. This is part of the bigger app, baased on several  microservices.
 
-Using python and flask + MongoDB. 
+Using python and flask + MongoDB as a database. 
