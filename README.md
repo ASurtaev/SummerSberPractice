@@ -6,7 +6,7 @@
 [![codecov](https://codecov.io/gh/ASurtaev/SummerSberPractice/branch/master/graph/badge.svg)](https://codecov.io/gh/ASurtaev/SummerSberPractice)
 [![chat](https://img.shields.io/discord/732082351357821018?label=Discord&style=flat-square)](https://discord.gg/nECsHwV)
   
-  
+  se
 Service for content and metadata management. This is part of the bigger app, baased on several  microservices.
 
 Using python and flask + MongoDB as a non-relation database. 
