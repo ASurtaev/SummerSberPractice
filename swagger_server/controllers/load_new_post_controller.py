@@ -61,6 +61,8 @@ def load_new_post(photo, description_post, tag_post, load_data_time=None, file_s
     try:
         result = posts.insert_one(post_data)
     except (Exception,writeConcernError) as ex:
+        del client
         return 501
 
+    del client
     return 201
