@@ -1,5 +1,7 @@
 import connexion
 import six
+from pymongo import MongoClient
+from flask import jsonify
 
 from swagger_server.models.successfull import Successfull  # noqa: E501
 from swagger_server import util
@@ -32,12 +34,22 @@ def load_new_post(photo, description_post, tag_post, load_data_time=None, file_s
     :rtype: Successfull
     """
     client = MongoClient('localhost', 27017)
+    try:
+        with open('idcounter.dat', 'r') as file_id_counter:
+            post_id = int(file_id_counter.readline())
+    except Exception as e:
+        print('Exception:', e)
+        del client
+        return jsonify({'result': False}), 500
+
     db = client.database
     posts = db.posts
+
     post_data = {
         'photo': photo,
         'description_post': description_post,
-        'tag_post': tag_post
+        'tag_post': tag_post,
+        'post_id': post_id
     }
     if load_data_time:
         post_data['load_data_time'] = load_data_time
@@ -53,16 +65,21 @@ def load_new_post(photo, description_post, tag_post, load_data_time=None, file_s
         post_data['file_format'] = file_format
 
     try:
-        post_id = posts.insert_one(post_data).inserted_id
-    except Exception as ex:
+        posts.insert_one(post_data)
+    except Exception as e:
+        print('Exception:', e)
         del post_data
         del posts
         del db
         del client
-        return (501, -1)
+        return jsonify({'result': False}), 501
+    
+    with open('idcounter.dat', 'w') as file_id_counter:
+        print(post_id + 1, file = file_id_counter)      
 
+    print('added post')
     del post_data
     del posts
     del db
     del client
-    return (201, post_id)
+    return jsonify({'post_id': post_id, 'result': True}), 201
