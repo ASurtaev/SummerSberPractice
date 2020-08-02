@@ -1,5 +1,6 @@
 import connexion
 import six
+from pymongo import MongoClient
 
 from swagger_server.models.successfull import Successfull  # noqa: E501
 from swagger_server import util
@@ -35,4 +36,31 @@ def load_new_post(photo, description_post, tag_post, load_data_time=None, file_s
 
     :rtype: Successfull
     """
-    return 'do some magic!'
+
+    client = MongoClient('localhost', 27017)
+    db = client.database
+    posts = db.posts
+    post_data = {
+        'photo': photo,
+        'description_post': description_post,
+        'tag_post': tag_post
+    }
+    if load_data_time:
+        post_data['load_data_time'] = load_data_time
+    if file_size:
+        post_data['file_size'] = file_size
+    if file_size_pixels:
+        post_data['file_size_pixels'] = file_size_pixels
+    if geolocation:
+        post_data['geolocation'] = geolocation
+    if user_id:
+        post_data['user_id'] = user_id
+    if file_format:
+        post_data['file_format'] = file_format
+
+    try:
+        result = posts.insert_one(post_data)
+    except (Exception,writeConcernError) as ex:
+        return 501
+
+    return 201
