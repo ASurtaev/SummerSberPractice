@@ -23,5 +23,11 @@ def get_post(post_id):  # noqa: E501
         pprint.pprint(post_data)
         print(type(post_data))
         photo = post_data.get('photo')
+        del posts
+        del db
+        del client
         return jsonify({'name': photo}), 201
+    del posts
+    del db
+    del client
     return jsonify({}), 501

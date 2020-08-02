@@ -1,5 +1,7 @@
 import connexion
 import six
+from pymongo import MongoClient
+from flask import jsonify
 
 from swagger_server import util
 
@@ -14,4 +16,21 @@ def delete_post(post_id):  # noqa: E501
 
     :rtype: str
     """
-    return 'do some magic!'
+    client = MongoClient('localhost', 27017)
+    db = client.database
+    posts = db.posts
+    
+    try:
+    	posts.delete_one({'post_id': post_id})
+    except Exception as e:
+    	print('Exception:', e)
+    	del post_data
+    	del posts
+    	del db
+    	del client
+    	return jsonify({}), 501
+    del post_data
+    del posts
+    del db
+    del client
+    return jsonify({}), 201

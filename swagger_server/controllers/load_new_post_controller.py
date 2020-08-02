@@ -68,7 +68,6 @@ def load_new_post(photo, description_post, tag_post, load_data_time=None, file_s
         posts.insert_one(post_data)
     except Exception as e:
         print('Exception:', e)
-        del post_data
         del posts
         del db
         del client
@@ -78,7 +77,6 @@ def load_new_post(photo, description_post, tag_post, load_data_time=None, file_s
         print(post_id + 1, file = file_id_counter)      
 
     print('added post')
-    del post_data
     del posts
     del db
     del client
