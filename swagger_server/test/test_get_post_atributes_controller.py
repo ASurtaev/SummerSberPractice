@@ -19,7 +19,7 @@ class TestGetPostAtributesController(BaseTestCase):
         """
         query_string = [('post_id', 'post_id_example')]
         response = self.client.open(
-            '/Get_post_atributes',
+            '/data/2.5//Get_post_atributes',
             method='GET',
             query_string=query_string)
         self.assert200(response,

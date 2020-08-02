@@ -5,6 +5,9 @@ info:
   version: "0.1 beta"
   contact:
     name: "CONTENT MANAGEMENT API"
+servers:
+- url: https://api.databasemicroservice.org/data/2.5/
+  description: "Some absctract server"
 paths:
   /Load_new_post:
     post:

@@ -19,7 +19,7 @@ class TestGetMetadataPostController(BaseTestCase):
         """
         query_string = [('post_id', 'post_id_example')]
         response = self.client.open(
-            '/Get_metadata_post',
+            '/data/2.5//Get_metadata_post',
             method='GET',
             query_string=query_string)
         self.assert200(response,

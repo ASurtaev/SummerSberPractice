@@ -27,7 +27,7 @@ class TestLoadNewPostController(BaseTestCase):
                         ('geolocation', 'geolocation_example'),
                         ('file_format', 'file_format_example')]
         response = self.client.open(
-            '/Load_new_post',
+            '/data/2.5//Load_new_post',
             method='POST',
             query_string=query_string)
         self.assert200(response,
