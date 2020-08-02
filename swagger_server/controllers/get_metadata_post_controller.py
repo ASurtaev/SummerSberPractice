@@ -7,30 +7,29 @@ from swagger_server.models.successfull3 import Successfull3  # noqa: E501
 from swagger_server import util
 
 def existing_metadata(post_data):
-	new_data = {}
-    load_data_time = post_data.get('load_data_time', default = None)
+    new_data = {}
+    load_data_time = post_data.get('load_data_time', None)
     if load_data_time:
-    	new_data['load_data_time'] = load_data_time
-
-    file_size = post_data.get('file_size', default = None)
+        new_data['load_data_time'] = load_data_time
+    file_size = post_data.get('file_size', None)
     if file_size:
-    	new_data['file_size'] = file_size
+        new_data['file_size'] = file_size
 
-    file_size_pixels = post_data.get('file_size_pixels', default = None)
+    file_size_pixels = post_data.get('file_size_pixels', None)
     if file_size_pixels:
-    	new_data['file_size_pixels'] = file_size_pixels
+        new_data['file_size_pixels'] = file_size_pixels
 
-    geolocation = post_data.get('geolocation', default = None)
+    geolocation = post_data.get('geolocation', None)
     if geolocation:
-    	new_data['geolocation'] = geolocation
+        new_data['geolocation'] = geolocation
 
-    user_id = post_data.get('user_id', default = None)
+    user_id = post_data.get('user_id', None)
     if user_id:
-    	new_data['user_id'] = user_id
+        new_data['user_id'] = user_id
 
-    file_format = post_data.get('file_format', default = None)
+    file_format = post_data.get('file_format', None)
     if file_format:
-    	new_data['file_format'] = file_format
+        new_data['file_format'] = file_format
     return new_data
 
 def get_metadata_post(post_id):  # noqa: E501
@@ -48,8 +47,8 @@ def get_metadata_post(post_id):  # noqa: E501
     posts = db.posts
     post_data = posts.find_one({'post_id': int(post_id)})
     if post_data:
-    	post_data = existing_metadata(post_data)
-    	post_data['result'] = True
+        post_data = existing_metadata(post_data)
+        post_data['result'] = True
         del posts
         del db
         del client

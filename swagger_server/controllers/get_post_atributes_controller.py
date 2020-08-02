@@ -2,6 +2,7 @@ import connexion
 import six
 from pymongo import MongoClient
 from flask import jsonify
+import pprint
 
 from swagger_server.models.successfull1 import Successfull1  # noqa: E501
 from swagger_server import util
@@ -22,7 +23,8 @@ def get_post_atributes(post_id):  # noqa: E501
     posts = db.posts
     post_data = posts.find_one({'post_id': int(post_id)})
     if post_data:
-        atributes = post_data.get('atributes')
+        atributes = post_data.get('description_post')
+        pprint.pprint(atributes)
         del posts
         del db
         del client

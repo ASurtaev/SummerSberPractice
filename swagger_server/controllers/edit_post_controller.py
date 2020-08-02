@@ -26,14 +26,14 @@ def edit_post(post_id, index_field):  # noqa: E501
         del posts
         del db
         del client
-    	return jsonify({}), 501
+        return jsonify({}), 501
     atributes = post_data.get('atributes')
     if index_field not in atributes:
         del posts
         del db
         del client
-    	return jsonify({}), 502
-
+        return jsonify({}), 502
+        
     posts.update_one({'post_id': int(post_id)}, {'$set': {str(index_field): 'this API was written by monkey'}})
 
     del posts
