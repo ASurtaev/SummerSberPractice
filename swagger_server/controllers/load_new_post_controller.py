@@ -53,16 +53,16 @@ def load_new_post(photo, description_post, tag_post, load_data_time=None, file_s
         post_data['file_format'] = file_format
 
     try:
-        result = posts.insert_one(post_data)
-    except (Exception,writeConcernError) as ex:
+        post_id = posts.insert_one(post_data).inserted_id
+    except Exception as ex:
         del post_data
         del posts
         del db
         del client
-        return 501
+        return (501, -1)
 
     del post_data
     del posts
     del db
     del client
-    return 201
+    return (201, post_id)
