@@ -18,7 +18,7 @@ class TestDeletePostController(BaseTestCase):
         """
         query_string = [('post_id', 'post_id_example')]
         response = self.client.open(
-            '/data/2.5//Delete_post',
+            '/Delete_post',
             method='DELETE',
             query_string=query_string)
         self.assert200(response,

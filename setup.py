@@ -18,7 +18,7 @@ setup(
     name=NAME,
     version=VERSION,
     description="CONTENT MANAGEMENT API",
-    author_email="some_email@gmail.com",
+    author_email="",
     url="",
     keywords=["Swagger", "CONTENT MANAGEMENT API"],
     install_requires=REQUIRES,

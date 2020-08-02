@@ -11,5 +11,6 @@ def main():
     app.add_api('swagger.yaml', arguments={'title': 'CONTENT MANAGEMENT API'}, pythonic_params=True)
     app.run(port=8080)
 
+
 if __name__ == '__main__':
     main()

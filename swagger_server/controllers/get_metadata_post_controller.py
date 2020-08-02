@@ -8,7 +8,7 @@ from swagger_server import util
 def get_metadata_post(post_id):  # noqa: E501
     """Get metadata post
 
-    There is description # noqa: E501
+    API to get the metadata of the post # noqa: E501
 
     :param post_id: Post id
     :type post_id: str

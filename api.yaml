@@ -5,21 +5,18 @@ info:
   version: "0.1 beta"
   contact:
     name: "CONTENT MANAGEMENT API"
-    email: "some_email@gmail.com"
-servers:
-- url: https://contentmnagement.org/data/2.5/
 paths:
   /Load_new_post:
     post:
       tags:
       - Load new post
       summary: "Loads a new post"
-      description: "There is description"
+      description: "API for loading a new post to the database"
       operationId: load_new_post
       parameters:
       - name: photo
         in: query
-        description: "Photo file in base64(?) format"
+        description: "Photo file in string format"
         required: true
         schema:
           type: string
@@ -61,29 +58,17 @@ paths:
         schema:
           type: array
           items:
-              type: integer 
+              type: integer
+              
+      - name: user_id
+        in: query
+        description: "Id of the user which has loaded the post"
+        schema:
+          type: integer 
           
       - name: geolocation
         in: query
         description: "Geolocation of the user"
-        schema:
-          type: string
-
-      - name: user_id
-        in: query
-        description: "Id of the user"
-        schema:
-          type: string
-
-      - name: MAC-adress
-        in: query
-        description: "MAC-adress of the user device, from which was loaded the post"
-        schema:
-          type: string
-      
-      - name: IP-adress
-        in: query
-        description: "IP-adress of the user device, from which was loaded the post"
         schema:
           type: string
           
@@ -94,20 +79,23 @@ paths:
           type: string
 
       responses:
-        200:
-          description: Successful loading response, photo added to database
+        201:
+          description: "Successful loading response, photo added to database"
           content:
             application/json:
               schema:
-                title: Successfull
+                title: "Successfull"
                 type: "object"
                 properties:
                    PostID:
                     type: integer
                    Result:
                     type: boolean
+        500:
+          description: "Unable to connect to database"
+        
 
-        404:
+        501:
           description: "Post wasn't loaded response"
           content:
             text/plain:
@@ -121,7 +109,7 @@ paths:
       tags:
       - Delete post
       summary: "Delete post"
-      description: "There is description"
+      description: "API to delete the post from database"
       operationId: delete_post
       parameters:
       - name: post_id
@@ -131,7 +119,7 @@ paths:
         schema:
           type: "string"
       responses:
-        200:
+        201:
           description: "Successful deletion response, post deleted from the database"
           content:
             text/plain:
@@ -139,7 +127,9 @@ paths:
                 title: "Error, post wasn't loaded"
                 type: string
                 example: "Successful deletion response, post deleted from the database"
-        400:
+        500:
+          description: "Unable to connect to database"
+        501:
           description: "Non-existing post_id"
           content:
             text/plain:
@@ -169,11 +159,13 @@ paths:
         schema:
           type: "integer"
       responses:
-        200:
+        201:
           description: "Corrected sucesfully"
-        300:
-          description: "Post with this id doesn't exist"
         500:
+          description: "Unable to connect to database"
+        501:
+          description: "Post with this id doesn't exist"
+        502:
           description: "Atribute with this index doesn't exist"
           
   /Get_post_atributes:
@@ -191,7 +183,7 @@ paths:
         schema:
           type: "string"
       responses:
-        200:
+        201:
           description: "Indexes returned sucesfully"
           content:
             application/json:
@@ -205,7 +197,9 @@ paths:
                      type: string
                    Result:
                     type: boolean
-        300:
+        500:
+          description: "Unable to connect to database"
+        501:
           description: "Post with this id doesn't exist"
           
           
@@ -224,7 +218,7 @@ paths:
         schema:
           type: "string"
       responses:
-        200:
+        201:
           description: "Post got succesfully"
           content:
             application/json:
@@ -235,22 +229,19 @@ paths:
                    Name:
                     type: string
                
-                    
-        400:
+        500:
+          description: "Unable to connect to database"           
+        501:
           description: "Post id doesn't exist"
-          content:
-            text/plain:
-              schema:
-                title: "Post id doesn't exist"
-                type: string
-                example: "Post id doesn't exist" 
+
+
   
   /Get_metadata_post:
     get:
       tags:
       - Get metadata post
       summary: Get metadata post
-      description: "There is description"
+      description: "API to get the metadata of the post"
       operationId: Get_metadata_post
       parameters:
       - name: Post_ID
@@ -260,7 +251,7 @@ paths:
         schema:
           type: "string"
       responses:
-        200:
+        201:
           description: Metadata received
           content:
             application/json:
@@ -280,22 +271,15 @@ paths:
                     type: string
                   user_id:
                     type: string
-                  MAC-adress:
-                    type: string
-                  IP-adress:
-                    type: string
                   File_format:
                     type: string
                   Result:
                     type: boolean
-        400:
+        500:
+          description: "Unable to connect to database"
+        501:
           description: "Post id doesn't exist"
-          content:
-            text/plain:
-              schema:
-                title: "Post id doesn't exist"
-                type: string
-                example: "Post id doesn't exist" 
+
 
 
 

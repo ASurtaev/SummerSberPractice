@@ -19,7 +19,7 @@ class TestEditPostController(BaseTestCase):
         query_string = [('post_id', 'post_id_example'),
                         ('index_field', 56)]
         response = self.client.open(
-            '/data/2.5//Edit_post_field',
+            '/Edit_post_field',
             method='POST',
             query_string=query_string)
         self.assert200(response,

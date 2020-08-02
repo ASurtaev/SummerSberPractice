@@ -14,7 +14,7 @@ class Successfull3(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, load_data_time: str=None, file_size: str=None, file_size_pixels: List[int]=None, geolocation: str=None, user_id: str=None, mac_adress: str=None, ip_adress: str=None, file_format: str=None, result: bool=None):  # noqa: E501
+    def __init__(self, load_data_time: str=None, file_size: str=None, file_size_pixels: List[int]=None, geolocation: str=None, user_id: str=None, file_format: str=None, result: bool=None):  # noqa: E501
         """Successfull3 - a model defined in Swagger
 
         :param load_data_time: The load_data_time of this Successfull3.  # noqa: E501
@@ -27,10 +27,6 @@ class Successfull3(Model):
         :type geolocation: str
         :param user_id: The user_id of this Successfull3.  # noqa: E501
         :type user_id: str
-        :param mac_adress: The mac_adress of this Successfull3.  # noqa: E501
-        :type mac_adress: str
-        :param ip_adress: The ip_adress of this Successfull3.  # noqa: E501
-        :type ip_adress: str
         :param file_format: The file_format of this Successfull3.  # noqa: E501
         :type file_format: str
         :param result: The result of this Successfull3.  # noqa: E501
@@ -42,8 +38,6 @@ class Successfull3(Model):
             'file_size_pixels': List[int],
             'geolocation': str,
             'user_id': str,
-            'mac_adress': str,
-            'ip_adress': str,
             'file_format': str,
             'result': bool
         }
@@ -54,8 +48,6 @@ class Successfull3(Model):
             'file_size_pixels': 'file_size_pixels',
             'geolocation': 'geolocation',
             'user_id': 'user_id',
-            'mac_adress': 'MAC-adress',
-            'ip_adress': 'IP-adress',
             'file_format': 'File_format',
             'result': 'Result'
         }
@@ -64,8 +56,6 @@ class Successfull3(Model):
         self._file_size_pixels = file_size_pixels
         self._geolocation = geolocation
         self._user_id = user_id
-        self._mac_adress = mac_adress
-        self._ip_adress = ip_adress
         self._file_format = file_format
         self._result = result
 
@@ -184,48 +174,6 @@ class Successfull3(Model):
         """
 
         self._user_id = user_id
-
-    @property
-    def mac_adress(self) -> str:
-        """Gets the mac_adress of this Successfull3.
-
-
-        :return: The mac_adress of this Successfull3.
-        :rtype: str
-        """
-        return self._mac_adress
-
-    @mac_adress.setter
-    def mac_adress(self, mac_adress: str):
-        """Sets the mac_adress of this Successfull3.
-
-
-        :param mac_adress: The mac_adress of this Successfull3.
-        :type mac_adress: str
-        """
-
-        self._mac_adress = mac_adress
-
-    @property
-    def ip_adress(self) -> str:
-        """Gets the ip_adress of this Successfull3.
-
-
-        :return: The ip_adress of this Successfull3.
-        :rtype: str
-        """
-        return self._ip_adress
-
-    @ip_adress.setter
-    def ip_adress(self, ip_adress: str):
-        """Sets the ip_adress of this Successfull3.
-
-
-        :param ip_adress: The ip_adress of this Successfull3.
-        :type ip_adress: str
-        """
-
-        self._ip_adress = ip_adress
 
     @property
     def file_format(self) -> str:

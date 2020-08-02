@@ -23,13 +23,11 @@ class TestLoadNewPostController(BaseTestCase):
                         ('load_data_time', 'load_data_time_example'),
                         ('file_size', 56),
                         ('file_size_pixels', 56),
+                        ('user_id', 56),
                         ('geolocation', 'geolocation_example'),
-                        ('user_id', 'user_id_example'),
-                        ('mac_adress', 'mac_adress_example'),
-                        ('ip_adress', 'ip_adress_example'),
                         ('file_format', 'file_format_example')]
         response = self.client.open(
-            '/data/2.5//Load_new_post',
+            '/Load_new_post',
             method='POST',
             query_string=query_string)
         self.assert200(response,
