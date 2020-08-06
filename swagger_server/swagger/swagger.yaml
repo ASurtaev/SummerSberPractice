@@ -25,26 +25,37 @@ paths:
         explode: true
         schema:
           type: string
-      - name: description_post
+      - name: post_name
         in: query
-        description: Atributes of post. Post name is always atribute with index 0.
+        description: Name of post
         required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: post_atributes
+        in: query
+        description: 'Atributes of post, name of the attribute and it''s value are
+          divided with '':'' '
+        required: false
         style: form
         explode: true
         schema:
           type: array
           items:
             type: string
+        example: '[Cost:500],[Color:red]'
       - name: tag_post
         in: query
-        description: Atributes of post
-        required: true
+        description: Tags of post
+        required: false
         style: form
         explode: true
         schema:
           type: array
           items:
             type: string
+        example: '[#shop],[#food]'
       - name: load_data_time
         in: query
         description: Time of loading post
@@ -102,14 +113,21 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Successfull'
-        "500":
-          description: Unable to connect to database
         "501":
+          description: Unable to connect to database
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Unable to connect to database
+                x-content-type: text/plain
+        "502":
           description: Post wasn't loaded response
           content:
             text/plain:
               schema:
-                title: Error, post wasn't loaded
+                title: Error
                 type: string
                 example: Post wasn't loaded
                 x-content-type: text/plain
@@ -136,18 +154,25 @@ paths:
           content:
             text/plain:
               schema:
-                title: Error, post wasn't loaded
+                title: Successful
                 type: string
                 example: Successful deletion response, post deleted from the database
                 x-content-type: text/plain
-        "500":
-          description: Unable to connect to database
         "501":
+          description: Unable to connect to database
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Unable to connect to database
+                x-content-type: text/plain
+        "502":
           description: Non-existing post_id
           content:
             text/plain:
               schema:
-                title: Ok
+                title: Error
                 type: string
                 example: Non-existing post_id
                 x-content-type: text/plain
@@ -157,7 +182,8 @@ paths:
       tags:
       - Edit post
       summary: Edit post
-      description: You can change the post's atribute using it's index from GetPostAtributes
+      description: Using GetPostAtributes, a list of atributes is called and the user
+        chooses which atribute he needs to name
       operationId: edit_post
       parameters:
       - name: Post_ID
@@ -168,31 +194,57 @@ paths:
         explode: true
         schema:
           type: string
-      - name: Index_field
+      - name: attribute_name
         in: query
-        description: Index of the required field
+        description: Attribute name
         required: true
         style: form
         explode: true
         schema:
-          type: integer
+          type: string
+      - name: new_value
+        in: query
+        description: New value of the attribute
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
       responses:
         "201":
           description: Corrected sucesfully
-        "500":
-          description: Unable to connect to database
+          content:
+            text/plain:
+              schema:
+                title: Successful
+                type: string
+                example: Corrected sucesfully
+                x-content-type: text/plain
         "501":
-          description: Post with this id doesn't exist
+          description: Unable to connect to database
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Unable to connect to database
+                x-content-type: text/plain
         "502":
-          description: Atribute with this index doesn't exist
+          description: Post with this id doesn't exist
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Post with this id doesn't exist
+                x-content-type: text/plain
       x-openapi-router-controller: swagger_server.controllers.edit_post_controller
   /Get_post_atributes:
     get:
       tags:
       - Get post atributes
       summary: Get post atributes
-      description: You can get the list of the post's indexes, name of the post always
-        has index 0
+      description: You can get the list of the post's atributes.
       operationId: get_post_atributes
       parameters:
       - name: Post_ID
@@ -205,22 +257,36 @@ paths:
           type: string
       responses:
         "201":
-          description: Indexes returned sucesfully
+          description: Attribute returned sucesfully
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Successfull_1'
-        "500":
-          description: Unable to connect to database
         "501":
+          description: Unable to connect to database
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Unable to connect to database
+                x-content-type: text/plain
+        "502":
           description: Post with this id doesn't exist
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Post with this id doesn't exist
+                x-content-type: text/plain
       x-openapi-router-controller: swagger_server.controllers.get_post_atributes_controller
   /Get_post:
     get:
       tags:
       - Get post
       summary: Get post
-      description: Get post by it's atributes
+      description: Get post's name and photo
       operationId: get_post
       parameters:
       - name: post_id
@@ -238,10 +304,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Successfull_2'
-        "500":
-          description: Unable to connect to database
         "501":
-          description: Post id doesn't exist
+          description: Unable to connect to database
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Unable to connect to database
+                x-content-type: text/plain
+        "502":
+          description: Post with this id doesn't exist
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Post with this id doesn't exist
+                x-content-type: text/plain
       x-openapi-router-controller: swagger_server.controllers.get_post_controller
   /Get_metadata_post:
     get:
@@ -266,10 +346,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Successfull_3'
-        "500":
-          description: Unable to connect to database
         "501":
-          description: Post id doesn't exist
+          description: Unable to connect to database
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Unable to connect to database
+                x-content-type: text/plain
+        "502":
+          description: Post with this id doesn't exist
+          content:
+            text/plain:
+              schema:
+                title: Error
+                type: string
+                example: Post with this id doesn't exist
+                x-content-type: text/plain
       x-openapi-router-controller: swagger_server.controllers.get_metadata_post_controller
 components:
   schemas:
@@ -288,25 +382,36 @@ components:
       title: Successfull
       type: object
       properties:
+        Name:
+          type: string
         Atributes:
           type: array
           items:
             type: string
-        Result:
-          type: boolean
-      example:
-        Atributes:
-        - Atributes
-        - Atributes
-        Result: true
+        Tag:
+          type: array
+          items:
+            type: string
+      example: "Name:\n Рeadphones\nAtributes: \n Cots 1500\n Color red\n Excellent\
+        \ quality\nTag:\n Music\n Accessories"
     Successfull_2:
       title: Successfull
       type: object
       properties:
+        Photo:
+          type: string
         Name:
           type: string
-      example:
-        Name: Name
+        Atributes:
+          type: array
+          items:
+            type: string
+        Tag:
+          type: array
+          items:
+            type: string
+      example: "PHOTO\nName:\n Рeadphones\nAtributes: \n Cots 1500\n Color red\n Excellent\
+        \ quality\nTag:\n Music\n Accessories"
     Successfull_3:
       title: Successfull
       type: object
@@ -327,14 +432,10 @@ components:
           type: string
         Result:
           type: boolean
-      example:
-        file_size_pixels:
-        - 0
-        - 0
-        user_id: user_id
-        load_data_time: load_data_time
-        File_format: File_format
-        file_size: file_size
-        geolocation: geolocation
-        Result: true
+      example: |-
+        Load data time: 16:50 03.08.2020
+        File size: 2 Mb
+        File size pixels: 1920 x 1080
+        Geoloction: Moskow
+        ......
 

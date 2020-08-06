@@ -1,7 +1,9 @@
 import connexion
 import six
+
 from pymongo import MongoClient
 from flask import jsonify
+
 
 from swagger_server import util
 
@@ -32,3 +34,4 @@ def delete_post(post_id):  # noqa: E501
     del db
     del client
     return jsonify({}), 201
+

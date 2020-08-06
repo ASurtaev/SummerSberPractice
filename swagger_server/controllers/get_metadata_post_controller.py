@@ -32,6 +32,7 @@ def existing_metadata(post_data):
         new_data['file_format'] = file_format
     return new_data
 
+
 def get_metadata_post(post_id):  # noqa: E501
     """Get metadata post
 
@@ -57,10 +58,4 @@ def get_metadata_post(post_id):  # noqa: E501
     del db
     del client
     return jsonify({'result': False}), 501
-
-
-
-
-
-
 

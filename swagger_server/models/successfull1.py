@@ -14,25 +14,30 @@ class Successfull1(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, atributes: List[str]=None, result: bool=None):  # noqa: E501
+    def __init__(self, name: str=None, atributes: List[str]=None, tag: List[str]=None):  # noqa: E501
         """Successfull1 - a model defined in Swagger
 
+        :param name: The name of this Successfull1.  # noqa: E501
+        :type name: str
         :param atributes: The atributes of this Successfull1.  # noqa: E501
         :type atributes: List[str]
-        :param result: The result of this Successfull1.  # noqa: E501
-        :type result: bool
+        :param tag: The tag of this Successfull1.  # noqa: E501
+        :type tag: List[str]
         """
         self.swagger_types = {
+            'name': str,
             'atributes': List[str],
-            'result': bool
+            'tag': List[str]
         }
 
         self.attribute_map = {
+            'name': 'Name',
             'atributes': 'Atributes',
-            'result': 'Result'
+            'tag': 'Tag'
         }
+        self._name = name
         self._atributes = atributes
-        self._result = result
+        self._tag = tag
 
     @classmethod
     def from_dict(cls, dikt) -> 'Successfull1':
@@ -44,6 +49,27 @@ class Successfull1(Model):
         :rtype: Successfull1
         """
         return util.deserialize_model(dikt, cls)
+
+    @property
+    def name(self) -> str:
+        """Gets the name of this Successfull1.
+
+
+        :return: The name of this Successfull1.
+        :rtype: str
+        """
+        return self._name
+
+    @name.setter
+    def name(self, name: str):
+        """Sets the name of this Successfull1.
+
+
+        :param name: The name of this Successfull1.
+        :type name: str
+        """
+
+        self._name = name
 
     @property
     def atributes(self) -> List[str]:
@@ -67,22 +93,22 @@ class Successfull1(Model):
         self._atributes = atributes
 
     @property
-    def result(self) -> bool:
-        """Gets the result of this Successfull1.
+    def tag(self) -> List[str]:
+        """Gets the tag of this Successfull1.
 
 
-        :return: The result of this Successfull1.
-        :rtype: bool
+        :return: The tag of this Successfull1.
+        :rtype: List[str]
         """
-        return self._result
+        return self._tag
 
-    @result.setter
-    def result(self, result: bool):
-        """Sets the result of this Successfull1.
+    @tag.setter
+    def tag(self, tag: List[str]):
+        """Sets the tag of this Successfull1.
 
 
-        :param result: The result of this Successfull1.
-        :type result: bool
+        :param tag: The tag of this Successfull1.
+        :type tag: List[str]
         """
 
-        self._result = result
+        self._tag = tag

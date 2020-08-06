@@ -7,16 +7,18 @@ from swagger_server.models.successfull import Successfull  # noqa: E501
 from swagger_server import util
 
 
-def load_new_post(photo, description_post, tag_post, load_data_time=None, file_size=None, file_size_pixels=None, user_id=None, geolocation=None, file_format=None):  # noqa: E501
+def load_new_post(photo, post_name, post_atributes=None, tag_post=None, load_data_time=None, file_size=None, file_size_pixels=None, user_id=None, geolocation=None, file_format=None):  # noqa: E501
     """Loads a new post
 
     API for loading a new post to the database # noqa: E501
 
     :param photo: Photo file in string format
     :type photo: str
-    :param description_post: Atributes of post. Post name is always atribute with index 0.
-    :type description_post: List[str]
-    :param tag_post: Atributes of post
+    :param post_name: Name of post
+    :type post_name: str
+    :param post_atributes: Atributes of post, name of the attribute and it&#x27;s value are divided with &#x27;:&#x27; 
+    :type post_atributes: List[str]
+    :param tag_post: Tags of post
     :type tag_post: List[str]
     :param load_data_time: Time of loading post
     :type load_data_time: str
@@ -47,10 +49,13 @@ def load_new_post(photo, description_post, tag_post, load_data_time=None, file_s
 
     post_data = {
         'photo': photo,
-        'description_post': description_post,
-        'tag_post': tag_post,
+        'post_name': post_name,
         'post_id': post_id
     }
+    if post_atributes:
+        post_data['post_attributes'] = post_atributes
+    if tag_post:
+        post_data['tag_post'] = tag_post
     if load_data_time:
         post_data['load_data_time'] = load_data_time
     if file_size:

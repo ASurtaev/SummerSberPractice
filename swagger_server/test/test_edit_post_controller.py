@@ -17,7 +17,8 @@ class TestEditPostController(BaseTestCase):
         Edit post
         """
         query_string = [('post_id', 'post_id_example'),
-                        ('index_field', 56)]
+                        ('attribute_name', 'attribute_name_example'),
+                        ('new_value', 'new_value_example')]
         response = self.client.open(
             '/data/2.5//Edit_post_field',
             method='POST',

@@ -18,7 +18,8 @@ class TestLoadNewPostController(BaseTestCase):
         Loads a new post
         """
         query_string = [('photo', 'photo_example'),
-                        ('description_post', 'description_post_example'),
+                        ('post_name', 'post_name_example'),
+                        ('post_atributes', 'post_atributes_example'),
                         ('tag_post', 'tag_post_example'),
                         ('load_data_time', 'load_data_time_example'),
                         ('file_size', 56),

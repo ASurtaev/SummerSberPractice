@@ -14,20 +14,35 @@ class Successfull2(Model):
 
     Do not edit the class manually.
     """
-    def __init__(self, name: str=None):  # noqa: E501
+    def __init__(self, photo: str=None, name: str=None, atributes: List[str]=None, tag: List[str]=None):  # noqa: E501
         """Successfull2 - a model defined in Swagger
 
+        :param photo: The photo of this Successfull2.  # noqa: E501
+        :type photo: str
         :param name: The name of this Successfull2.  # noqa: E501
         :type name: str
+        :param atributes: The atributes of this Successfull2.  # noqa: E501
+        :type atributes: List[str]
+        :param tag: The tag of this Successfull2.  # noqa: E501
+        :type tag: List[str]
         """
         self.swagger_types = {
-            'name': str
+            'photo': str,
+            'name': str,
+            'atributes': List[str],
+            'tag': List[str]
         }
 
         self.attribute_map = {
-            'name': 'Name'
+            'photo': 'Photo',
+            'name': 'Name',
+            'atributes': 'Atributes',
+            'tag': 'Tag'
         }
+        self._photo = photo
         self._name = name
+        self._atributes = atributes
+        self._tag = tag
 
     @classmethod
     def from_dict(cls, dikt) -> 'Successfull2':
@@ -39,6 +54,27 @@ class Successfull2(Model):
         :rtype: Successfull2
         """
         return util.deserialize_model(dikt, cls)
+
+    @property
+    def photo(self) -> str:
+        """Gets the photo of this Successfull2.
+
+
+        :return: The photo of this Successfull2.
+        :rtype: str
+        """
+        return self._photo
+
+    @photo.setter
+    def photo(self, photo: str):
+        """Sets the photo of this Successfull2.
+
+
+        :param photo: The photo of this Successfull2.
+        :type photo: str
+        """
+
+        self._photo = photo
 
     @property
     def name(self) -> str:
@@ -60,3 +96,45 @@ class Successfull2(Model):
         """
 
         self._name = name
+
+    @property
+    def atributes(self) -> List[str]:
+        """Gets the atributes of this Successfull2.
+
+
+        :return: The atributes of this Successfull2.
+        :rtype: List[str]
+        """
+        return self._atributes
+
+    @atributes.setter
+    def atributes(self, atributes: List[str]):
+        """Sets the atributes of this Successfull2.
+
+
+        :param atributes: The atributes of this Successfull2.
+        :type atributes: List[str]
+        """
+
+        self._atributes = atributes
+
+    @property
+    def tag(self) -> List[str]:
+        """Gets the tag of this Successfull2.
+
+
+        :return: The tag of this Successfull2.
+        :rtype: List[str]
+        """
+        return self._tag
+
+    @tag.setter
+    def tag(self, tag: List[str]):
+        """Sets the tag of this Successfull2.
+
+
+        :param tag: The tag of this Successfull2.
+        :type tag: List[str]
+        """
+
+        self._tag = tag
