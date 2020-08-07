@@ -29,14 +29,14 @@ def edit_post(post_id, attribute_name, new_value):  # noqa: E501
         del db
         del client
         return jsonify({}), 501
-    atributes = post_data.get('atributes')
-    if index_field not in atributes:
+    attributes = post_data.get('post_attributes')
+    if attribute_name not in attributes:
         del posts
         del db
         del client
         return jsonify({}), 502
         
-    posts.update_one({'post_id': int(post_id)}, {'$set': {str(index_field): 'test'}})
+    posts.update_one({'post_id': int(post_id)}, {'$set': {str(attribute_name): new_value}})
 
     del posts
     del db

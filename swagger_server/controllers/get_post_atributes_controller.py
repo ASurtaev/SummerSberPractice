@@ -23,7 +23,7 @@ def get_post_atributes(post_id):  # noqa: E501
     posts = db.posts
     post_data = posts.find_one({'post_id': int(post_id)})
     if post_data:
-        atributes = post_data.get('description_post')
+        atributes = post_data.get('post_attributes')
         pprint.pprint(atributes)
         del posts
         del db
