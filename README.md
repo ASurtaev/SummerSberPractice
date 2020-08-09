@@ -47,3 +47,15 @@ docker build -t swagger_server .
 # starting up a container
 docker run -p 8080:8080 swagger_server
 ```
+
+## Running with Docker Compose
+
+To run the server and mongodb on a Docker container, please execute the following commands in the root directory:
+
+```bash
+# to run servicies (mongo and app)
+docker-compose -up -d
+
+# to run and rebuild servicies (mongo and app)
+docker-compose -up -d --build
+```

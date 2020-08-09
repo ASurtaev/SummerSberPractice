@@ -20,7 +20,7 @@ def edit_post(post_id, attribute_name, new_value):  # noqa: E501
 
     :rtype: str
     """
-    client = MongoClient('localhost', 27017)
+    client = MongoClient('mongo', 27017)
     db = client.database
     posts = db.posts
     post_data = posts.find_one({'post_id': int(post_id)})
@@ -35,11 +35,10 @@ def edit_post(post_id, attribute_name, new_value):  # noqa: E501
         del db
         del client
         return jsonify({}), 502
-        
+
     posts.update_one({'post_id': int(post_id)}, {'$set': {str(attribute_name): new_value}})
 
     del posts
     del db
     del client
     return jsonify({}), 201
-

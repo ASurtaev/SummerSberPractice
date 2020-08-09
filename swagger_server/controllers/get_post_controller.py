@@ -7,6 +7,7 @@ from flask import jsonify
 from swagger_server.models.successfull2 import Successfull2  # noqa: E501
 from swagger_server import util
 
+
 def existing_metadata(post_data):
     new_data = {}
     load_data_time = post_data.get('load_data_time', None)
@@ -44,12 +45,12 @@ def get_post(post_id):  # noqa: E501
 
     :rtype: Successfull2
     """
-    client = MongoClient('localhost', 27017)
+    client = MongoClient('mongo', 27017)
     db = client.database
     posts = db.posts
     post_data = posts.find_one({'post_id': int(post_id)})
     if post_data:
-        #testing 2 lines
+        # testing 2 lines
         pprint.pprint(post_data)
         print(type(post_data))
         post_metadata = existing_metadata(post_data)
@@ -60,7 +61,7 @@ def get_post(post_id):  # noqa: E501
         del posts
         del db
         del client
-        return jsonify({'photo': photo, 'name': name, 'post_attributes' : post_attributes, 'tags' : tags, 'post_metadata': post_metadata}), 201
+        return jsonify({'photo': photo, 'name': name, 'post_attributes': post_attributes, 'tags': tags, 'post_metadata': post_metadata}), 201
     del posts
     del db
     del client
