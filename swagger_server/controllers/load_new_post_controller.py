@@ -35,7 +35,7 @@ def load_new_post(photo, post_name, post_atributes=None, tag_post=None, load_dat
 
     :rtype: Successfull
     """
-    client = MongoClient('localhost', 27017)
+    client = MongoClient('mongo', 27017)
     try:
         with open('idcounter.dat', 'r') as file_id_counter:
             post_id = int(file_id_counter.readline())
@@ -77,9 +77,9 @@ def load_new_post(photo, post_name, post_atributes=None, tag_post=None, load_dat
         del db
         del client
         return jsonify({'result': False}), 501
-    
+
     with open('idcounter.dat', 'w') as file_id_counter:
-        print(post_id + 1, file = file_id_counter)      
+        print(post_id + 1, file=file_id_counter)
 
     print('added post')
     del posts

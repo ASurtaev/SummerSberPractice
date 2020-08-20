@@ -18,7 +18,7 @@ def get_post_atributes(post_id):  # noqa: E501
 
     :rtype: Successfull1
     """
-    client = MongoClient('localhost', 27017)
+    client = MongoClient('mongo', 27017)
     db = client.database
     posts = db.posts
     post_data = posts.find_one({'post_id': int(post_id)})

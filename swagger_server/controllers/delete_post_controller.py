@@ -18,20 +18,19 @@ def delete_post(post_id):  # noqa: E501
 
     :rtype: str
     """
-    client = MongoClient('localhost', 27017)
+    client = MongoClient('mongo', 27017)
     db = client.database
     posts = db.posts
-    
+
     try:
-    	posts.delete_one({'post_id': post_id})
+        posts.delete_one({'post_id': post_id})
     except Exception as e:
-    	print('Exception:', e)
-    	del posts
-    	del db
-    	del client
-    	return jsonify({}), 501
+        print('Exception:', e)
+        del posts
+        del db
+        del client
+        return jsonify({}), 501
     del posts
     del db
     del client
     return jsonify({}), 201
-
