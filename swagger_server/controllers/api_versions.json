@@ -1,0 +1,31 @@
+[
+    {
+        "path": "/Delete_post",
+        "api_version": "v1"
+    },
+
+    {
+        "path": "/Edit_post_field",
+        "api_version": "v1"
+    },
+
+    {
+        "path": "/Get_metadata_post",
+        "api_version": "v1"
+    },
+
+    {
+        "path": "/Get_post",
+        "api_version": "v1"
+    },
+
+    {
+        "path": "/Get_post_attributes",
+        "api_version": "v1"
+    },
+    
+    {
+        "path": "/Load_new_post",
+        "api_version": "v1"
+    }
+]

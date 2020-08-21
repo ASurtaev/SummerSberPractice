@@ -1,16 +1,30 @@
-#!/usr/bin/env python3
+ service_ip = "127.0.0.1"
+    service_port = "8053"
+    gateway_service_ip = "127.0.0.1"
+    gateway_service_port = "8080"
+    apis = None
+    with open("api_versions.json", 'r') as f:
+     apis = json.load(f)
+    gateway_connector = GatewayConnector(
+            gateway_service_ip,
+            gateway_service_port,
+            service_ip,
+            service_port,
+            'Content and metadata management service',
+            '0.1.1alpha',
+            apis)
 
-import connexion
-import os
-import configparser
-import sys
-import json
-import requests
-from threading import Thread
-from time import sleep
-from flask import Flask
-from swagger_server import encoder
+    print('#' * 50)
+    print('GATEWAY CONNECTOR'.center(50))
+    print('#' * 50)
+    gateway_connector.publish()
+    print('1) Published')
 
+    gateway_connector.ready()
+    print('2) Ready')
+
+    gateway_connector.start()
+    print('3) Thread started')
 gateway_connector = None
 
 class GatewayConnector(Thread):
@@ -121,42 +135,3 @@ class GatewayConnector(Thread):
         if response.status_code != 200:
             self.ready_to_ping = False
             raise ConnectionError
-
-def main():
-    service_ip = "127.0.0.1"
-    service_port = "8053"
-    gateway_service_ip = "127.0.0.1"
-    gateway_service_port = "8080"
-    apis = None
-    with open("api_versions.json", 'r') as f:
-     apis = json.load(f)
-    gateway_connector = GatewayConnector(
-            gateway_service_ip,
-            gateway_service_port,
-            service_ip,
-            service_port,
-            'Content and metadata management service',
-            '0.1.1alpha',
-            apis)
-
-    print('#' * 50)
-    print('GATEWAY CONNECTOR'.center(50))
-    print('#' * 50)
-    gateway_connector.publish()
-    print('1) Published')
-
-    gateway_connector.ready()
-    print('2) Ready')
-
-    gateway_connector.start()
-    print('3) Thread started')
-    
-    app = connexion.App(__name__, specification_dir='./swagger/')
-    app.app.json_encoder = encoder.JSONEncoder
-    app.add_api('swagger.yaml', arguments={'title': 'CONTENT MANAGEMENT API'}, pythonic_params=True)
-    app.run(port=8053)
-   
-
-
-if __name__ == '__main__':
-    main()

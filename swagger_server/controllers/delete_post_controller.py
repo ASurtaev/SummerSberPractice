@@ -18,7 +18,7 @@ def delete_post(post_id):  # noqa: E501
 
     :rtype: str
     """
-    client = MongoClient('mongo', 27017)
+    client = MongoClient('localhost', 27017)
     db = client.database
     posts = db.posts
 

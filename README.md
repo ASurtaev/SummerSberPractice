@@ -59,3 +59,92 @@ docker-compose -up -d
 # to run and rebuild servicies (mongo and app)
 docker-compose -up -d --build
 ```
+- name: photo
+        in: body
+        description: Photo file in string format
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: post_name
+        in: body
+        description: Name of post
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: post_atributes
+        in: body
+        description: 'Atributes of post, name of the attribute and it''s value are
+          divided with '':'' '
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+        example: '[Cost:500],[Color:red]'
+      - name: tag_post
+        in: body
+        description: Tags of post
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+        example: '[#shop],[#food]'
+      - name: load_data_time
+        in: body
+        description: Time of loading post
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: file_size
+        in: body
+        description: Size of the photo file in bytes
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: file_size_pixels
+        in: body
+        description: Size of the photo file in pixels
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+      - name: user_id
+        in: body
+        description: Id of the user which has loaded the post
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - name: geolocation
+        in: body
+        description: Geolocation of the user
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: File_format
+        in: body
+        description: Format of file like JPEG,PNG,BMP or others
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string

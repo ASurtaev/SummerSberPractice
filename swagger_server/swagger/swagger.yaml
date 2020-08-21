@@ -6,7 +6,7 @@ info:
     name: CONTENT MANAGEMENT API
   version: 0.1 beta
 servers:
-- url: https://api.databasemicroservice.org/data/2.5/
+- url: http://localhost:8053
   description: Some absctract server
 paths:
   /Load_new_post:

@@ -6,8 +6,7 @@ info:
   contact:
     name: "CONTENT MANAGEMENT API"
 servers:
-- url: https://api.databasemicroservice.org/data/2.5/
-  description: "Some absctract server"
+  http://localhost:8053
 paths:
   /Load_new_post:
     post:

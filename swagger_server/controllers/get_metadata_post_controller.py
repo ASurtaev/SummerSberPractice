@@ -44,7 +44,7 @@ def get_metadata_post(post_id):  # noqa: E501
 
     :rtype: Successfull3
     """
-    client = MongoClient('mongo', 27017)
+    client = MongoClient('localhost', 27017)
     db = client.database
     posts = db.posts
     post_data = posts.find_one({'post_id': int(post_id)})
